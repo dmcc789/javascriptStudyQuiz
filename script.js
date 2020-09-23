@@ -6,7 +6,7 @@ var submitInital = document.querySelector("#initials");
 
 var questionEl;
 var buttonEl;
-let count = 5;
+let count = 8;
 
 // declaring question objects
 const qOne = {
@@ -19,11 +19,11 @@ const qTwo = {
     correctAnswer: ["All"],
     possibleIncorrectAnswers: ["Animation", "Logic", "Dynamic functionality"],
 }; 
-// const qThree = {
-//     text:"",
-//     correctAnswer: ,
-//     possibleIncorrectAnswers: [],
-// };
+const qThree = {
+    text:"What does DOM stand for?",
+    correctAnswer: ["Document Object Model"] ,
+    possibleIncorrectAnswers: ["Document Obstacle Model", "Donut Object Model", "Document Object Morsel"],
+};
 // const qFour = {
 //     text:"",
 //     correctAnswer: ,
@@ -36,7 +36,7 @@ const qTwo = {
 // }; 
 
 // declaring question object array
-const quizQs = [qOne, qTwo];
+const quizQs = [qOne, qTwo, qThree];
 // const question = quizQs[i];
 
 
@@ -70,8 +70,10 @@ function createQuiz() {
     questionEl.appendChild(ulEl);
 
     var answers = qOne.possibleIncorrectAnswers.concat(qOne.correctAnswer);
-    
-    answers.forEach(i => {
+    var sortAnswers = answers.sort();
+
+    //creating a button for each answer
+    sortAnswers.forEach(i => {
         var liEl = document.createElement("li");
         ulEl.appendChild(liEl);
         var buttonEl = document.createElement("button");
@@ -79,7 +81,17 @@ function createQuiz() {
         buttonEl.setAttribute("class", "btn btn-info")
         buttonEl.innerText = i;
         liEl.appendChild(buttonEl);
+        buttonEl.addEventListener("click", function() {
+            if (this.innerText === qOne.correctAnswer[0]) {
+                // need to display Correct! (setTimeOut) & move to next question *****
+                console.log(this.innerText);
+            } else {
+                // need to display Wrong! (setTimeOut) & deduct 10 seconds & move to next question *****
+                console.log("i dont know whats happening");
+            }
+        })
     })  
+
 
     // for (let i = 0; i < quizQs.length; i++) {
     //     const question = quizQs[i];
