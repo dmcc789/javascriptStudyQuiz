@@ -7,7 +7,7 @@ var submitInital = document.querySelector("#initials");
 
 var questionEl;
 var buttonEl;
-let count = 35;
+let count = 75;
 
 // declaring question objects
 const qOne = {
@@ -40,6 +40,7 @@ const qFive = {
 const quizQs = [qOne, qTwo, qThree, qFour, qFive];
 
 let currentQuestionIndex = 0; //global variable 
+let yourScore = "";
 
 // defining set counter function
 function setCounter() {
@@ -50,6 +51,9 @@ function setCounter() {
         if(count === 0) {
             clearInterval(timerInterval);
             hallOfFame();
+        }
+        if(currentQuestionIndex > 4) {
+            clearInterval(timerInterval);
         }
     }, 1000);
 }
@@ -102,10 +106,60 @@ function loopEr() {
     if (currentQuestionIndex < 5) {
         createQuiz(currentQuestionIndex);
     } else {
-        
         hallOfFame();
     };      
 }
+
+
+
+// defining function to create enter initials landing page
+function hallOfFame() {
+    mainContent.textContent = " ";
+    messageEl.textContent = " ";
+    
+    var yourScore = count.valueOf;
+    var h1El = document.createElement("h1");
+    var h2El = document.createElement("h2");
+    var formEl = document.createElement("form");
+    var inputEl = document.createElement("input");
+    var submitEl = document.createElement("button");
+
+    h1El.textContent = "All done!"
+    h2El.textContent = "Your final score is " + yourScore;
+    inputEl.setAttribute("placeholder", "Initials");
+    
+    submitEl.setAttribute("type", "button");
+    submitEl.setAttribute("class", "btn btn-info");
+    submitEl.textContent = "Submit";
+
+    mainContent.appendChild(h1El);
+    mainContent.appendChild(h2El);
+    h2El.appendChild(formEl);
+    formEl.appendChild(inputEl);
+    formEl.appendChild(submitEl);
+}
+
+//binding Start Quiz button with click event listener 
+
+letsGoEl.addEventListener("click", function() {
+    setCounter();
+    createQuiz();
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+//___________________________________________________________
+
     // for (let i = 0; i < quizQs.length; i++) {
     //     const question = quizQs[i];
     //     createQuestions();
@@ -152,41 +206,3 @@ function loopEr() {
 // function moveAhead() {
 //     if 
 // }
-
-let userScore = 3;
-
-// defining function to create enter initials landing page
-function hallOfFame() {
-    mainContent.textContent = " ";
-    messageEl.textContent = " ";
-    
-
-    var h1El = document.createElement("h1");
-    var h2El = document.createElement("h2");
-    var formEl = document.createElement("form");
-    var inputEl = document.createElement("input");
-    var submitEl = document.createElement("button");
-
-    h1El.textContent = "All done!"
-    h2El.textContent = "Your final score is " + userScore;
-    inputEl.setAttribute("placeholder", "Initials");
-    
-    submitEl.setAttribute("type", "button");
-    submitEl.setAttribute("class", "btn btn-info");
-    submitEl.textContent = "Submit";
-
-    mainContent.appendChild(h1El);
-    mainContent.appendChild(h2El);
-    h2El.appendChild(formEl);
-    formEl.appendChild(inputEl);
-    formEl.appendChild(submitEl);
-}
-
-
-
-
-letsGoEl.addEventListener("click", function() {
-    setCounter();
-    createQuiz();
-})
-
