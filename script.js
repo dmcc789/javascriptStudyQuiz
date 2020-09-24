@@ -7,7 +7,7 @@ var submitInital = document.querySelector("#initials");
 
 var questionEl;
 var buttonEl;
-let count = 15;
+let count = 35;
 
 // declaring question objects
 const qOne = {
@@ -25,26 +25,21 @@ const qThree = {
     correctAnswer: ["Document Object Model"] ,
     possibleIncorrectAnswers: ["Document Obstacle Model", "Donut Object Model", "Document Object Morsel"],
 };
-// const qFour = {
-//     text:"",
-//     correctAnswer: ,
-//     possibleIncorrectAnswers: [],
-// };
-// const qFive = {
-//     text:"",
-//     correctAnswer: ,
-//     possibleIncorrectAnswers: [],
-// }; 
+const qFour = {
+    text:"What can help you debug your JavaScript code?",
+    correctAnswer: ["all of these"],
+    possibleIncorrectAnswers: ["coffee", "console.log", "deep breaths"],
+};
+const qFive = {
+    text:"What makes you think STRING?",
+    correctAnswer: ["Quotations"],
+    possibleIncorrectAnswers: ["Parentheses", "A dollar sign", "Double vertical bars"],
+}; 
 
 // declaring question object array
-const quizQs = [qOne, qTwo, qThree];
+const quizQs = [qOne, qTwo, qThree, qFour, qFive];
 
 let currentQuestionIndex = 0; //global variable 
-let currentQuestion = quizQs[currentQuestionIndex]; 
-
-
-// const question = quizQs[i];
-
 
 // defining set counter function
 function setCounter() {
@@ -57,13 +52,11 @@ function setCounter() {
             hallOfFame();
         }
     }, 1000);
-    
 }
-
-
 // defining a function to create each "screen" of question/button combination
 function createQuiz() {
-    
+    let currentQuestion = quizQs[currentQuestionIndex]; 
+
     mainContent.textContent = " ";
     messageEl.textContent = " ";
     mainContent.setAttribute("class", "text-left");
@@ -97,18 +90,19 @@ function createQuiz() {
                 // to display Correct! & move to next question 
                 setTimeout(function() {messageEl.textContent= "Correct!"});
             } else {
-                // to display Wrong! & deduct 10 seconds & move to next question 
+                // to display Wrong! & deduct 15 seconds & move to next question 
                 setTimeout(function() {messageEl.textContent= "Wrong!"});
-                count = (count-5);
+                count = (count-15);
             };
         })
     });  
 }
 
 function loopEr() {
-    if (currentQuestionIndex < 3) {
+    if (currentQuestionIndex < 5) {
         createQuiz(currentQuestionIndex);
     } else {
+        
         hallOfFame();
     };      
 }
